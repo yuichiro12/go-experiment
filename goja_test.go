@@ -17,16 +17,28 @@ func TestGojaFunc(t *testing.T) {
 		log.Fatalln(err)
 	}
 	har, err := readFile("golang.org.har")
+	spew.Dump(har)
 	if err != nil {
 		log.Fatalln(err)
 	}
 	vm.Set("json", har)
-	_, err = vm.RunString(script)
+	pg, err := goja.Compile(har, "", false)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	spew.Dump(vm.Get("jsonstr"))
-
+	vm.RunProgram(pg)
+	v, err := vm.RunString(script)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	spew.Dump(v.String())
+	vm = goja.New()
+	vm.Set("json", har)
+	v, err = vm.RunString(script)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	spew.Dump(v.String())
 }
 func readFile(f string) (string, error) {
 	buf, err := ioutil.ReadFile(f)
