@@ -1,22 +1,52 @@
 /* bootstrap */
-window[func](JSON.parse(json));
+(function bootstrap() {
+    return JSON.stringify(eval(func)(JSON.parse(json)));
+})();
 
+/**
+ *
+ * @param j
+ * @returns {*}
+ */
 function onStartScenario(j) {
-    return JSON.stringify(j)
+    j.log = 0;
+    return j;
 }
 
+/**
+ *
+ * @param j
+ * @returns {*}
+ */
 function onEndScenario(j) {
-    return JSON.stringify(j)
+    j.log = "aaaaa";
+    throw "Error Error Error";
+    return j;
 }
 
+/**
+ *
+ * @param j
+ * @returns {*}
+ */
 function setRequestParameter(j) {
-    return JSON.stringify(j)
+    return j;
 }
 
+/**
+ *
+ * @param j
+ * @returns {*}
+ */
 function setRequestHeader(j) {
-    return JSON.stringify(j)
+    return j;
 }
 
+/**
+ *
+ * @param j
+ * @returns {*}
+ */
 function saveParams(j) {
-    return JSON.stringify(j)
+    return j;
 }
